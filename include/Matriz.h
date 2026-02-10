@@ -11,6 +11,8 @@ class Matriz
 
         void operator=(int** entradas);
         int* operator[](int n);
+        void operator+(const Matriz& a);
+        void operator-(const Matriz& a);
 
         void redimensionar(int filas, int columnas);
 
