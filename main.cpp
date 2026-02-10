@@ -6,15 +6,15 @@ using namespace std;
 
 int main()
 {
-    Matriz a(2, 2);
+    Matriz a(5, 7);
 
     cin >> a;
 
     cout << a;
 
-    a.redimensionar(3, 3);
+    a.redimensionar(2, 5);
 
-    cout << a;
+    cout << "\n" << a;
 
     return 0;
 }

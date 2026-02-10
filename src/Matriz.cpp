@@ -24,7 +24,22 @@ int* Matriz::operator[](int n)
 
 void Matriz::redimensionar(int filas, int columnas)
 {
+    int** nuevo = generarTabla(filas, columnas);
 
+    for(int i = 0; i < std::min((int) this->filas, filas); ++i) {
+        for(int j = 0; j < std::min((int) this->columnas, columnas); ++j) {
+            nuevo[i][j] = this->entradas[i][j];
+        }
+    }
+
+    for(unsigned int i = 0; i < this->filas; ++i) {
+            delete[] this->entradas[i];
+    }
+    delete[] this->entradas;
+
+    this->entradas = nuevo;
+    this->filas = filas;
+    this->columnas = columnas;
 }
 
 std::ostream& operator<<(std::ostream& os, const Matriz& a)
@@ -48,14 +63,14 @@ std::istream& operator>>(std::istream& is, Matriz& a)
     std::cout << "Ingrese la cantidad de columnas:\n";
     is >> columnas;
 
+    a.redimensionar(filas, columnas);
+
     std::cout << "Ingrese los valores de la matriz (" << filas << "x" << columnas << "):\n";
     for(int i = 0; i < filas; ++i) {
         for(int j = 0; j < columnas; ++j) {
             is >> a[i][j];
         }
     }
-
-    a.redimensionar(filas, columnas);
 
     return is;
 }
