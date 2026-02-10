@@ -1,0 +1,78 @@
+#include "Matriz.h"
+#include <iostream>
+
+Matriz::Matriz(unsigned int filas, unsigned int columnas)
+{
+    this->filas = filas;
+    this->columnas = columnas;
+
+    this->entradas = generarTabla(this->filas, this->columnas);
+}
+
+Matriz::~Matriz()
+{
+    for (unsigned int i = 0; i < filas; i++) {
+        delete[] entradas[i];
+    }
+    delete[] entradas;
+}
+
+int* Matriz::operator[](int n)
+{
+    return entradas[n];
+}
+
+void Matriz::redimensionar(int filas, int columnas)
+{
+
+}
+
+std::ostream& operator<<(std::ostream& os, const Matriz& a)
+{
+    for(unsigned int i = 0; i < a.filas; ++i) {
+        for(unsigned int j = 0; j < a.columnas; ++j) {
+            os << a.entradas[i][j] << " ";
+        }
+        os << std::endl;
+    }
+
+    return os;
+}
+
+std::istream& operator>>(std::istream& is, Matriz& a)
+{
+    int filas, columnas;
+    std::cout << "Ingrese la cantidad de filas:\n";
+    is >> filas;
+
+    std::cout << "Ingrese la cantidad de columnas:\n";
+    is >> columnas;
+
+    std::cout << "Ingrese los valores de la matriz (" << filas << "x" << columnas << "):\n";
+    for(int i = 0; i < filas; ++i) {
+        for(int j = 0; j < columnas; ++j) {
+            is >> a[i][j];
+        }
+    }
+
+    a.redimensionar(filas, columnas);
+
+    return is;
+}
+
+int** Matriz::generarTabla(unsigned int filas, unsigned int columnas)
+{
+    int** tabla;
+    tabla = new int*[filas];
+    for (unsigned int i = 0; i < filas; ++i) {
+        tabla[i] = new int[columnas];
+    }
+
+    for(unsigned int i = 0; i < filas; ++i) {
+        for(unsigned  int j = 0; j < columnas; ++j) {
+            tabla[i][j] = 0;
+        }
+    }
+
+    return tabla;
+}
