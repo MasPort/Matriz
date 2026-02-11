@@ -6,14 +6,13 @@ using namespace std;
 
 int main()
 {
-    Matriz a(1, 1);
+    Matriz a(2, 2);
 
     cin >> a;
-    cout << a << endl;
+    cout << a * 5 << endl;
 
-    a.transpuesta();
 
-    cout << a << endl;
+    cout << 5 * a << endl;
 
     return 0;
 }
