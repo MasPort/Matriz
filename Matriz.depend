@@ -1,13 +1,13 @@
 # depslib dependency file v1.0
-1770771915 source:/home/maspot/scul/Tareas/Sexto/estructuraDeDatos/Matriz/main.cpp
+1770773422 source:/home/maspot/scul/Tareas/Sexto/estructuraDeDatos/Matriz/main.cpp
 	<iostream>
 	"Matriz.h"
 
-1770772206 source:/home/maspot/scul/Tareas/Sexto/estructuraDeDatos/Matriz/src/Matriz.cpp
+1770773624 source:/home/maspot/scul/Tareas/Sexto/estructuraDeDatos/Matriz/src/Matriz.cpp
 	"Matriz.h"
 	<iostream>
 
-1770770434 /home/maspot/scul/Tareas/Sexto/estructuraDeDatos/Matriz/include/Matriz.h
+1770773226 /home/maspot/scul/Tareas/Sexto/estructuraDeDatos/Matriz/include/Matriz.h
 	<iostream>
 
 1770772066 source:c:\users\angel\desktop\trabajo\main.cpp

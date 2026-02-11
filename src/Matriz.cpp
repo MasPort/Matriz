@@ -46,6 +46,21 @@ Matriz Matriz::operator*(const Matriz& a)
     return Matriz(this->filas, a.columnas, resultado);
 }
 
+void Matriz::transpuesta()
+{
+    int** resultado = generarTabla(this->columnas, this->filas);
+    for(int i = 0; i < this->filas; ++i) {
+        for(int j = 0; j < this->columnas; ++j) {
+            resultado[j][i] = this->entradas[i][j];
+        }
+    }
+
+    this->entradas = resultado;
+    unsigned int temp = this->columnas;
+    this->columnas = this->filas;
+    this->filas = temp;
+}
+
 void Matriz::redimensionar(int filas, int columnas)
 {
     int** nuevo = generarTabla(filas, columnas);
@@ -118,8 +133,8 @@ int** Matriz::generarTabla(unsigned int filas, unsigned int columnas)
 Matriz Matriz::operator*(const int a)
 {
     int** Resultado = generarTabla(this->columnas, this->filas);
-    for (int i = 0; i < this->filas; i++) {
-        for (int j = 0; j < this->columnas; j++) {
+    for (unsigned int i = 0; i < this->filas; i++) {
+        for (unsigned int j = 0; j < this->columnas; j++) {
             Resultado[i][j]= this->entradas[i][j]*a;
         }
     }
@@ -132,8 +147,8 @@ Matriz Matriz::operator+(const Matriz& a)
 
     if (this->columnas == a.columnas && this->filas == a.filas){
         int** Resultado = generarTabla(a.columnas, a.filas);
-        for (int i = 0; i < this->filas; i++) {
-            for (int j = 0; j < this->columnas; j++) {
+        for (unsigned int i = 0; i < this->filas; i++) {
+            for (unsigned int j = 0; j < this->columnas; j++) {
                 Resultado[i][j]= this->entradas[i][j] + a.entradas[i][j];
             }
         }
@@ -148,8 +163,8 @@ Matriz Matriz::operator-(const Matriz& a)
 
     if (this->columnas == a.columnas && this->filas == a.filas){
         int** Resultado = generarTabla(a.columnas, a.filas);
-        for (int i = 0; i < this->filas; i++) {
-            for (int j = 0; j < this->columnas; j++) {
+        for (unsigned int i = 0; i < this->filas; i++) {
+            for (unsigned int j = 0; j < this->columnas; j++) {
                 Resultado[i][j]= this->entradas[i][j] - a.entradas[i][j];
             }
         }

@@ -5,6 +5,8 @@
 
 class Matriz
 {
+    friend std::ostream& operator<<(std::ostream& os, const Matriz& a);
+    friend std::istream& operator>>(std::istream& is, Matriz& a);
     public:
         Matriz(unsigned int filas, unsigned int columnas);
         Matriz(unsigned int filas, unsigned int columnas, int** entradas);
@@ -17,11 +19,8 @@ class Matriz
         Matriz operator-(const Matriz& a);
         Matriz operator*(const int a);
 
-
+        void transpuesta();
         void redimensionar(int filas, int columnas);
-
-        friend std::ostream& operator<<(std::ostream& os, const Matriz& a);
-        friend std::istream& operator>>(std::istream& is, Matriz& a);
     protected:
 
     private:

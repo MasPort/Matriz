@@ -7,15 +7,13 @@ using namespace std;
 int main()
 {
     Matriz a(1, 1);
-    Matriz b(1, 1);
 
     cin >> a;
     cout << a << endl;
 
-    cin >> b;
-    cout << b << endl;
+    a.transpuesta();
 
-    cout << a * b;
+    cout << a << endl;
 
     return 0;
 }
