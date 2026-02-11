@@ -2,11 +2,6 @@
 #include <iostream>
 #include <cmath>
 
-/*
- * Constructor que crea una matriz con dimensiones dadas.
- * @param filas Número de filas.
- * @param columnas Número de columnas.
- */
 Matriz::Matriz(unsigned int filas, unsigned int columnas)
 {
     this->filas = filas;
@@ -15,13 +10,6 @@ Matriz::Matriz(unsigned int filas, unsigned int columnas)
     this->entradas = generarTabla(this->filas, this->columnas);
 }
 
-/*
- * Constructor que crea una matriz con dimensiones dadas
- * y una tabla ya inicializada.
- * @param filas Número de filas.
- * @param columnas Número de columnas.
- * @param entradas Tabla de valores.
- */
 Matriz::Matriz(unsigned int filas, unsigned int columnas, double** entradas)
 {
     this->filas = filas;
@@ -30,9 +18,19 @@ Matriz::Matriz(unsigned int filas, unsigned int columnas, double** entradas)
     this->entradas = entradas;
 }
 
-/*
- * Destructor. Libera la memoria dinámica utilizada.
- */
+Matriz::Matriz(const Matriz& otra)
+{
+    filas = otra.filas;
+    columnas = otra.columnas;
+    entradas = generarTabla(filas, columnas);
+
+    for (unsigned int i = 0; i < filas; ++i) {
+        for (unsigned int j = 0; j < columnas; ++j) {
+            entradas[i][j] = otra.entradas[i][j];
+        }
+    }
+}
+
 Matriz::~Matriz()
 {
     for (unsigned int i = 0; i < filas; i++) {
@@ -41,22 +39,11 @@ Matriz::~Matriz()
     delete[] entradas;
 }
 
-/*
- * Sobrecarga del operador [] para acceder a una fila.
- * @param n Índice de la fila.
- * @return Puntero a la fila solicitada.
- */
 double* Matriz::operator[](int n)
 {
     return entradas[n];
 }
 
-/*
- * Sobrecarga del operador * para multiplicación matriz * matriz.
- * @param a Matriz a multiplicar.
- * @return Nueva matriz resultado.
- * @throw Lanza excepción si las dimensiones no son compatibles.
- */
 Matriz Matriz::operator*(const Matriz& a)
 {
     if(this->columnas != a.filas) throw "Error: Tamano de matrices incorrecto";
@@ -73,9 +60,6 @@ Matriz Matriz::operator*(const Matriz& a)
     return Matriz(this->filas, a.columnas, resultado);
 }
 
-/*
- * Convierte la matriz actual en su transpuesta.
- */
 void Matriz::transpuesta()
 {
     double** resultado = generarTabla(columnas, filas);
@@ -94,11 +78,6 @@ void Matriz::transpuesta()
     std::swap(filas, columnas);
 }
 
-/*
- * Calcula la matriz inversa.
- * @return Matriz inversa.
- * @throw Lanza excepción si la matriz no es cuadrada o no tiene inversa.
- */
 Matriz Matriz::inversa()
 {
     if (filas != columnas) throw "La matriz no es cuadrada";
@@ -111,11 +90,6 @@ Matriz Matriz::inversa()
     return adj * (1.0 / det);
 }
 
-/*
- * Calcula el determinante de la matriz.
- * @return Valor del determinante.
- * @throw Lanza excepción si la matriz no es cuadrada.
- */
 double Matriz::determinante()
 {
     if (filas != columnas) throw "La matriz no es cuadrada";
@@ -144,11 +118,6 @@ double Matriz::determinante()
     return det;
 }
 
-/*
- * Redimensiona la matriz conservando los valores existentes.
- * @param filas Nuevo número de filas.
- * @param columnas Nuevo número de columnas.
- */
 void Matriz::redimensionar(int filas, int columnas)
 {
     double** nuevo = generarTabla(filas, columnas);
@@ -169,9 +138,6 @@ void Matriz::redimensionar(int filas, int columnas)
     this->columnas = columnas;
 }
 
-/*
- * Sobrecarga del operador << para salida por flujo.
- */
 std::ostream& operator<<(std::ostream& os, const Matriz& a)
 {
     for(unsigned int i = 0; i < a.filas; ++i) {
@@ -184,9 +150,6 @@ std::ostream& operator<<(std::ostream& os, const Matriz& a)
     return os;
 }
 
-/*
- * Sobrecarga del operador >> para entrada por flujo.
- */
 std::istream& operator>>(std::istream& is, Matriz& a)
 {
     int filas, columnas;
@@ -208,10 +171,6 @@ std::istream& operator>>(std::istream& is, Matriz& a)
     return is;
 }
 
-/*
- * Genera dinámicamente una tabla bidimensional
- * inicializada en cero.
- */
 double** Matriz::generarTabla(unsigned int filas, unsigned int columnas)
 {
     double** tabla;
@@ -229,10 +188,6 @@ double** Matriz::generarTabla(unsigned int filas, unsigned int columnas)
     return tabla;
 }
 
-/*
- * Calcula la matriz de cofactores.
- * @return Matriz de cofactores.
- */
 Matriz Matriz::cofactor()
 {
     if (filas != columnas) throw "Error: La matriz no es cuadrada";
@@ -336,18 +291,26 @@ Matriz operator*(double escalar, Matriz& a)
  * Sobrecarga del operador de asignación.
  * @param a Matriz que será asignada.
  */
-void Matriz::operator=(const Matriz& a)
+Matriz& Matriz::operator=(const Matriz& a)
 {
+    if (this == &a) return *this;
 
-double** Resultado = generarTabla(a.columnas, a.filas);
-for (unsigned int i = 0; i < a.filas; i++) {
-    for (unsigned int j = 0; j < a.columnas; j++) {
-        Resultado[i][j]= a.entradas[i][j];
+    for (unsigned int i = 0; i < filas; ++i) {
+        delete[] entradas[i];
+    }
+    delete[] entradas;
+
+    filas = a.filas;
+    columnas = a.columnas;
+
+    entradas = generarTabla(filas, columnas);
+
+    for (unsigned int i = 0; i < filas; ++i) {
+        for (unsigned int j = 0; j < columnas; ++j) {
+            entradas[i][j] = a.entradas[i][j];
         }
     }
-   redimensionar( a.filas, a.columnas);
-   this->entradas=Resultado;
 
-
+    return *this;
 }
 
