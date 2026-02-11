@@ -30,6 +30,22 @@ int* Matriz::operator[](int n)
     return entradas[n];
 }
 
+Matriz Matriz::operator*(const Matriz& a)
+{
+    if(this->columnas != a.filas) throw "Error: Tamano de matrices incorrecto";
+    int** resultado = generarTabla(this->filas, a.columnas);
+
+    for(unsigned int i = 0; i <  this->filas; ++i) {
+        for(unsigned int j = 0; j < a.columnas; ++j) {
+            for(unsigned int k = 0; k < this->columnas; ++k) {
+                resultado[i][j] += this->entradas[i][k] * a.entradas[k][j];
+            }
+        }
+    }
+
+    return Matriz(this->filas, a.columnas, resultado);
+}
+
 void Matriz::redimensionar(int filas, int columnas)
 {
     int** nuevo = generarTabla(filas, columnas);

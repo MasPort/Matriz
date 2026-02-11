@@ -6,21 +6,16 @@ using namespace std;
 
 int main()
 {
-    Matriz a(5, 7);
-    Matriz b(2, 7);
+    Matriz a(1, 1);
+    Matriz b(1, 1);
 
     cin >> a;
+    cout << a << endl;
+
     cin >> b;
+    cout << b << endl;
 
-    cout << a;
-    try {
-        cout << b + a;
-    }
-    catch (...){
-        cout << "no see pudo";
-    }
-
-    cout << "\n" << a;
+    cout << a * b;
 
     return 0;
 }
