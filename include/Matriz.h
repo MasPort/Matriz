@@ -9,7 +9,7 @@ class Matriz
     friend std::istream& operator>>(std::istream& is, Matriz& a);
     friend Matriz operator*(double escalar, Matriz& a);
     public:
-        Matriz(unsigned int filas, unsigned int columnas);
+        Matriz(unsigned int filas = 1, unsigned int columnas = 1);
         Matriz(unsigned int filas, unsigned int columnas, double** entradas);
         Matriz(const Matriz& otra);
         virtual ~Matriz();
@@ -29,8 +29,8 @@ class Matriz
     protected:
 
     private:
-        unsigned int filas = 1;
-        unsigned int columnas = 1;
+        unsigned int filas;
+        unsigned int columnas;
         double** entradas;
 
         double** generarTabla(unsigned int filas, unsigned int columnas);
