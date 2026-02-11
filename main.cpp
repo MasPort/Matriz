@@ -6,19 +6,14 @@ using namespace std;
 
 int main()
 {
-    Matriz a(5, 7);
-    Matriz b(2, 7);
+    Matriz a(1, 1);
 
     cin >> a;
+    cout << a << endl;
 
+    a.transpuesta();
 
-
-    cout << a;
-
-    cout << a * 5;
-    cout << 5 * a;
-
-
+    cout << a << endl;
 
     return 0;
 }
