@@ -140,7 +140,6 @@ Matriz Matriz::cofactor()
     for(int i = 0; i < size; ++i) {
         for (int j = 0; j < size; ++j) {
             double** sub = generarTabla(size - 1, size - 1);
-
         }
     }
 }
@@ -188,3 +187,10 @@ Matriz Matriz::operator-(const Matriz& a)
       throw "no se pudo" ;
     }
 }
+
+Matriz operator*(int escalar, Matriz&a) {
+
+    return a * escalar;
+}
+
+
