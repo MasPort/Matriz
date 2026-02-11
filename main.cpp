@@ -10,9 +10,12 @@ int main()
     Matriz b(2, 7);
 
     cin >> a;
+    cin >> b;
+
 
     cout << a;
-    cout << a * 5;
+    cout << b;
+    cout << a - b;
 
 
 
