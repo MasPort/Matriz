@@ -101,9 +101,9 @@ int** Matriz::generarTabla(unsigned int filas, unsigned int columnas)
 }
 Matriz Matriz::operator*(const int a)
 {
-        int** Resultado = generarTabla(this->columnas, this->filas);
-    for (int i = 0; i < this->filas; i++) {
-        for (int j = 0; j < this->columnas; j++) {
+    int** Resultado = generarTabla(this->columnas, this->filas);
+    for (unsigned int i = 0; i < this->filas; i++) {
+        for (unsigned int j = 0; j < this->columnas; j++) {
             Resultado[i][j]= this->entradas[i][j]*a;
         }
     }
@@ -116,8 +116,8 @@ Matriz Matriz::operator+(const Matriz& a)
 
     if (this->columnas == a.columnas && this->filas == a.filas){
         int** Resultado = generarTabla(a.columnas, a.filas);
-        for (int i = 0; i < this->filas; i++) {
-            for (int j = 0; j < this->columnas; j++) {
+        for (unsigned int i = 0; i < this->filas; i++) {
+            for (unsigned int j = 0; j < this->columnas; j++) {
                 Resultado[i][j]= this->entradas[i][j] + a.entradas[i][j];
             }
         }
@@ -132,8 +132,8 @@ Matriz Matriz::operator-(const Matriz& a)
 
     if (this->columnas == a.columnas && this->filas == a.filas){
         int** Resultado = generarTabla(a.columnas, a.filas);
-        for (int i = 0; i < this->filas; i++) {
-            for (int j = 0; j < this->columnas; j++) {
+        for (unsigned int i = 0; i < this->filas; i++) {
+            for (unsigned int j = 0; j < this->columnas; j++) {
                 Resultado[i][j]= this->entradas[i][j] - a.entradas[i][j];
             }
         }
@@ -142,3 +142,10 @@ Matriz Matriz::operator-(const Matriz& a)
       throw "no se pudo" ;
     }
 }
+
+Matriz operator*(int escalar, Matriz&a) {
+
+    return a * escalar;
+}
+
+
