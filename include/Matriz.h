@@ -18,8 +18,8 @@ class Matriz
         Matriz operator*(const Matriz& a);
         Matriz operator+(const Matriz& a);
         Matriz operator-(const Matriz& a);
+        void operator=(const Matriz& a);
         Matriz operator*(const double a);
-        Matriz operator=(const Matriz& a);
 
         void transpuesta();
         Matriz inversa();
