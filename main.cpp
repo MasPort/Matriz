@@ -6,13 +6,8 @@ using namespace std;
 
 int main()
 {
-    Matriz a(2, 2);
-
-    cin >> a;
-    cout << a * 5 << endl;
-
-
-    cout << 5 * a << endl;
+    Matriz a(1, 1);
+    Matriz b(2, 2);
 
     return 0;
 }
