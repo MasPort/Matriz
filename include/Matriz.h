@@ -9,26 +9,29 @@ class Matriz
     friend std::istream& operator>>(std::istream& is, Matriz& a);
     public:
         Matriz(unsigned int filas, unsigned int columnas);
-        Matriz(unsigned int filas, unsigned int columnas, int** entradas);
+        Matriz(unsigned int filas, unsigned int columnas, double** entradas);
         virtual ~Matriz();
 
         void operator=(int** entradas);
-        int* operator[](int n);
+        double* operator[](int n);
         Matriz operator*(const Matriz& a);
         Matriz operator+(const Matriz& a);
         Matriz operator-(const Matriz& a);
         Matriz operator*(const int a);
+        Matriz operator=(const Matriz& a);
 
         void transpuesta();
+        Matriz inversa();
         void redimensionar(int filas, int columnas);
     protected:
 
     private:
         unsigned int filas = 1;
         unsigned int columnas = 1;
-        int** entradas;
+        double** entradas;
 
-        int** generarTabla(unsigned int filas, unsigned int columnas);
+        double** generarTabla(unsigned int filas, unsigned int columnas);
+        Matriz cofactor();
 };
 
 #endif // MATRIZ_H
