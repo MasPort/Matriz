@@ -10,17 +10,11 @@ int main()
     Matriz b(2, 7);
 
     cin >> a;
-    cin >> b;
 
     cout << a;
-    try {
-        cout << b + a;
-    }
-    catch (...){
-        cout << "no see pudo";
-    }
+    cout << a * 5;
 
-    cout << "\n" << a;
+
 
     return 0;
 }
