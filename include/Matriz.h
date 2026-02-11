@@ -23,6 +23,8 @@ class Matriz
 
         void transpuesta();
         Matriz inversa();
+        double determinante();
+        Matriz cofactor();
         void redimensionar(int filas, int columnas);
     protected:
 
@@ -32,7 +34,6 @@ class Matriz
         double** entradas;
 
         double** generarTabla(unsigned int filas, unsigned int columnas);
-        Matriz cofactor();
 };
 
 #endif // MATRIZ_H

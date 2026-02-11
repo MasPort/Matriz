@@ -14,5 +14,10 @@ int main()
     b = a;
     cout << b;
 
+    cin >> a;
+
+    cout << 1.0 / a.determinante();
+    cout << a.inversa() * (1.0 / a.determinante());
+
     return 0;
 }
