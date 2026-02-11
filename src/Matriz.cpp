@@ -49,16 +49,60 @@ Matriz Matriz::operator*(const Matriz& a)
 
 void Matriz::transpuesta()
 {
-    double** resultado = generarTabla(this->columnas, this->filas);
-    for(unsigned int i = 0; i < this->filas; ++i) {
-        for(unsigned int j = 0; j < this->columnas; ++j) {
-            resultado[j][i] = this->entradas[i][j];
+    double** resultado = generarTabla(columnas, filas);
+    for(unsigned int i = 0; i < filas; ++i) {
+        for(unsigned int j = 0; j < columnas; ++j) {
+            resultado[j][i] = entradas[i][j];
         }
     }
-    this->entradas = resultado;
-    unsigned int temp = this->columnas;
-    this->columnas = this->filas;
-    this->filas = temp;
+
+    for (unsigned int i = 0; i < filas; ++i) {
+        delete[] entradas[i];
+    }
+    delete[] entradas;
+
+    entradas = resultado;
+    std::swap(filas, columnas);
+}
+
+Matriz Matriz::inversa()
+{
+    if (filas != columnas) throw "La matriz no es cuadrada";
+    double det = determinante();
+    if (det == 0) throw "La matriz no tiene inversa";
+
+    Matriz adj = cofactor();
+    adj.transpuesta();
+
+    return adj * (1.0 / det);
+}
+
+double Matriz::determinante()
+{
+    if (filas != columnas) throw "La matriz no es cuadrada";
+    if (filas == 1) return entradas[0][0];
+    if (filas == 2) return entradas[0][0] * entradas[1][1] - entradas[0][1] * entradas[1][0];
+
+    double det = 0.0;
+
+    for (unsigned int j = 0; j < columnas; ++j) {
+
+        double** sub = generarTabla(filas - 1, columnas - 1);
+
+        int subi = 0;
+        for (unsigned int i = 1; i < filas; ++i) {
+            int subj = 0;
+            for (unsigned int k = 0; k < columnas; ++k) {
+                if (k == j) continue;
+                sub[subi][subj++] = entradas[i][k];
+            }
+            subi++;
+        }
+        Matriz menor(filas - 1, columnas - 1, sub);
+        det += std::pow(-1, j) * entradas[0][j] * menor.determinante();
+    }
+
+    return det;
 }
 
 void Matriz::redimensionar(int filas, int columnas)
@@ -134,17 +178,34 @@ double** Matriz::generarTabla(unsigned int filas, unsigned int columnas)
 Matriz Matriz::cofactor()
 {
     if (filas != columnas) throw "Error: La matriz no es cuadrada";
-    int size = filas;
-    double** resultado = generarTabla(size, size);
 
-    for(int i = 0; i < size; ++i) {
-        for (int j = 0; j < size; ++j) {
-            double** sub = generarTabla(size - 1, size - 1);
+    int n = filas;
+    double** resultado = generarTabla(n, n);
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            double** sub = generarTabla(n - 1, n - 1);
+
+            int subi = 0;
+            for (int fi = 0; fi < n; ++fi) {
+                if (fi == i) continue;
+
+                int subj = 0;
+                for (int cj = 0; cj < n; ++cj) {
+                    if (cj == j) continue;
+                    sub[subi][subj++] = entradas[fi][cj];
+                }
+                subi++;
+            }
+
+            Matriz menor(n - 1, n - 1, sub);
+            resultado[i][j] = pow(-1, i + j) * menor.determinante();
         }
     }
+    return Matriz(n, n, resultado);
 }
 
-Matriz Matriz::operator*(const int a)
+Matriz Matriz::operator*(const double a)
 {
     double** Resultado = generarTabla(this->columnas, this->filas);
     for (unsigned int i = 0; i < this->filas; i++) {
@@ -188,7 +249,7 @@ Matriz Matriz::operator-(const Matriz& a)
     }
 }
 
-Matriz operator*(int escalar, Matriz&a) {
+Matriz operator*(double escalar, Matriz&a) {
 
     return a * escalar;
 }

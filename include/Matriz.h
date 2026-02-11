@@ -7,6 +7,7 @@ class Matriz
 {
     friend std::ostream& operator<<(std::ostream& os, const Matriz& a);
     friend std::istream& operator>>(std::istream& is, Matriz& a);
+    friend Matriz operator*(double escalar, Matriz& a);
     public:
         Matriz(unsigned int filas, unsigned int columnas);
         Matriz(unsigned int filas, unsigned int columnas, double** entradas);
@@ -17,11 +18,13 @@ class Matriz
         Matriz operator*(const Matriz& a);
         Matriz operator+(const Matriz& a);
         Matriz operator-(const Matriz& a);
-        Matriz operator*(const int a);
+        Matriz operator*(const double a);
         Matriz operator=(const Matriz& a);
 
         void transpuesta();
         Matriz inversa();
+        double determinante();
+        Matriz cofactor();
         void redimensionar(int filas, int columnas);
     protected:
 
@@ -31,7 +34,6 @@ class Matriz
         double** entradas;
 
         double** generarTabla(unsigned int filas, unsigned int columnas);
-        Matriz cofactor();
 };
 
 #endif // MATRIZ_H
