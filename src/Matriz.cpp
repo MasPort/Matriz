@@ -143,7 +143,11 @@ Matriz Matriz::cofactor()
         }
     }
 }
-
+/*
+ * Sobrecarga del operador * para multiplicar una matriz por un escalar.
+ * @param a Escalar por el cual se multiplicará la matriz.
+ * @return Nueva matriz resultado de la multiplicación.
+ */
 Matriz Matriz::operator*(const double a)
 {
     double** Resultado = generarTabla(this->columnas, this->filas);
@@ -155,7 +159,12 @@ Matriz Matriz::operator*(const double a)
     return Matriz(this->filas, this->columnas, Resultado);
 
 }
-
+/*
+ * Sobrecarga del operador + para sumar dos matrices.
+ * @param a Matriz que se sumará con la matriz actual.
+ * @return Nueva matriz resultado de la suma.
+ * @throw Lanza una excepción si las dimensiones no coinciden.
+ */
 Matriz Matriz::operator+(const Matriz& a)
 {
 
@@ -171,7 +180,12 @@ Matriz Matriz::operator+(const Matriz& a)
       throw "no se pudo" ;
     }
 }
-
+/*
+ * Sobrecarga del operador - para restar dos matrices.
+ * @param a Matriz que se restará de la matriz actual.
+ * @return Nueva matriz resultado de la resta.
+ * @throw Lanza una excepción si las dimensiones no coinciden.
+ */
 Matriz Matriz::operator-(const Matriz& a)
 {
 
@@ -187,13 +201,22 @@ Matriz Matriz::operator-(const Matriz& a)
       throw "no se pudo" ;
     }
 }
-
+/*
+ * Sobrecarga del operador * para permitir multiplicación
+ * escalar * matriz.
+ * @param escalar Valor escalar.
+ * @param a Matriz a multiplicar.
+ * @return Nueva matriz resultado.
+ */
 Matriz operator*(double escalar, Matriz& a)
 {
 
     return a * escalar;
 }
-
+/*
+ * Sobrecarga del operador de asignación.
+ * @param a Matriz que será asignada.
+ */
 void Matriz::operator=(const Matriz& a)
 {
 
