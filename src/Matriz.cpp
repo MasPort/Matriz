@@ -105,21 +105,13 @@ Matriz Matriz::operator+(const Matriz& a)
 
     if (this->columnas == a.columnas && this->filas == a.filas){
         int** Resultado = generarTabla(a.columnas, a.filas);
-
-
-
-            for (int i = 0; i < this->columnas; i++) {
-                for (int j = 0; j < this->filas; j++) {
-                    Resultado[i][j]= this->entradas[i][j] + a.entradas[i][j];
-
-                }
-
-
+        for (int i = 0; i < this->columnas; i++) {
+            for (int j = 0; j < this->filas; j++) {
+                Resultado[i][j]= this->entradas[i][j] + a.entradas[i][j];
             }
-            return Matriz(a.filas, a.columnas, Resultado);
-
+        }
+        return Matriz(a.filas, a.columnas, Resultado);
     }else{
       throw "no se pudo" ;
-
     }
 }
