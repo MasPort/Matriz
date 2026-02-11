@@ -11,14 +11,14 @@
 1770786171 /home/maspot/scul/Tareas/Sexto/estructuraDeDatos/Matriz/include/Matriz.h
 	<iostream>
 
-1770784457 source:c:\users\angel\desktop\trabajo\main.cpp
+1770787486 source:c:\users\angel\desktop\trabajo\main.cpp
 	<iostream>
 	"Matriz.h"
 
-1770786670 c:\users\angel\desktop\trabajo\include\matriz.h
+1770788507 c:\users\angel\desktop\trabajo\include\matriz.h
 	<iostream>
 
-1770784832 source:c:\users\angel\desktop\trabajo\src\matriz.cpp
+1770787049 source:c:\users\angel\desktop\trabajo\src\matriz.cpp
 	"Matriz.h"
 	<iostream>
 	<cmath>
