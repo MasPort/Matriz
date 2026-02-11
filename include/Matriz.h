@@ -50,7 +50,7 @@ public:
      * @param filas N&uacute;mero de filas.
      * @param columnas N&uacute;mero de columnas.
      */
-    Matriz(unsigned int filas, unsigned int columnas);
+    Matriz(unsigned int filas = 1, unsigned int columnas = 1);
 
     /**
      * @brief Constructor que crea una matriz usando una tabla ya existente.
