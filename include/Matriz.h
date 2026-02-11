@@ -11,9 +11,10 @@ class Matriz
     public:
         Matriz(unsigned int filas, unsigned int columnas);
         Matriz(unsigned int filas, unsigned int columnas, double** entradas);
+        Matriz(consta Matriz& otra);
         virtual ~Matriz();
 
-        void operator=(int** entradas);
+        Matriz& operator=(int** entradas);
         double* operator[](int n);
         Matriz operator*(const Matriz& a);
         Matriz operator+(const Matriz& a);

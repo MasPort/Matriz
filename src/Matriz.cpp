@@ -18,6 +18,19 @@ Matriz::Matriz(unsigned int filas, unsigned int columnas, double** entradas)
     this->entradas = entradas;
 }
 
+Matriz::Matriz(const Matriz& otra)
+{
+    filas = otra.filas;
+    columnas = otra.columnas;
+    entradas = generarTabla(filas, columnas);
+
+    for (unsigned int i = 0; i < filas; ++i) {
+        for (unsigned int j = 0; j < columnas; ++j) {
+            entradas[i][j] = otra.entradas[i][j];
+        }
+    }
+}
+
 Matriz::~Matriz()
 {
     for (unsigned int i = 0; i < filas; i++) {
@@ -278,7 +291,7 @@ Matriz operator*(double escalar, Matriz& a)
  * Sobrecarga del operador de asignación.
  * @param a Matriz que será asignada.
  */
-void Matriz::operator=(const Matriz& a)
+Matriz& Matriz::operator=(const Matriz& a)
 {
 
 double** Resultado = generarTabla(a.columnas, a.filas);
