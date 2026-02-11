@@ -1,7 +1,20 @@
+/*
+ * Archivo: Matriz.cpp
+ * Descripción: Implementación de la clase Matriz.
+ *              Contiene constructores, destructor,
+ *              operadores sobrecargados y métodos
+ *              matemáticos asociados.
+ * Autores: Jorge Alberto Guerrero Hernandez
+ *          Angel Mora Loustaunau
+ */
 #include "Matriz.h"
 #include <iostream>
 #include <cmath>
 
+/*
+ * Constructor.
+ * Crea una matriz con el número de filas y columnas indicadas.
+ */
 Matriz::Matriz(unsigned int filas, unsigned int columnas)
 {
     this->filas = filas;
@@ -10,6 +23,9 @@ Matriz::Matriz(unsigned int filas, unsigned int columnas)
     this->entradas = generarTabla(this->filas, this->columnas);
 }
 
+/*
+ * Constructor con tabla inicial.
+ */
 Matriz::Matriz(unsigned int filas, unsigned int columnas, double** entradas)
 {
     this->filas = filas;
@@ -18,6 +34,9 @@ Matriz::Matriz(unsigned int filas, unsigned int columnas, double** entradas)
     this->entradas = entradas;
 }
 
+/*
+ * Constructor de copia.
+ */
 Matriz::Matriz(const Matriz& otra)
 {
     filas = otra.filas;
@@ -31,6 +50,10 @@ Matriz::Matriz(const Matriz& otra)
     }
 }
 
+/*
+ * Destructor.
+ * Libera la memoria dinámica utilizada por la matriz.
+ */
 Matriz::~Matriz()
 {
     for (unsigned int i = 0; i < filas; i++) {
@@ -39,11 +62,18 @@ Matriz::~Matriz()
     delete[] entradas;
 }
 
+/*
+ * Sobrecarga del operador [].
+ * Permite acceder a una fila específica.
+ */
 double* Matriz::operator[](int n)
 {
     return entradas[n];
 }
 
+/*
+ * Sobrecarga del operador * (matriz * matriz).
+ */
 Matriz Matriz::operator*(const Matriz& a)
 {
     if(this->columnas != a.filas) throw "Error: Tamano de matrices incorrecto";
@@ -60,6 +90,9 @@ Matriz Matriz::operator*(const Matriz& a)
     return Matriz(this->filas, a.columnas, resultado);
 }
 
+/*
+ * Transpone la matriz actual.
+ */
 void Matriz::transpuesta()
 {
     double** resultado = generarTabla(columnas, filas);
@@ -78,6 +111,9 @@ void Matriz::transpuesta()
     std::swap(filas, columnas);
 }
 
+/*
+ * Calcula la matriz inversa.
+ */
 Matriz Matriz::inversa()
 {
     if (filas != columnas) throw "La matriz no es cuadrada";
@@ -90,6 +126,9 @@ Matriz Matriz::inversa()
     return adj * (1.0 / det);
 }
 
+/*
+ * Calcula el determinante de la matriz.
+ */
 double Matriz::determinante()
 {
     if (filas != columnas) throw "La matriz no es cuadrada";
@@ -118,6 +157,9 @@ double Matriz::determinante()
     return det;
 }
 
+/*
+ * Redimensiona la matriz conservando valores existentes.
+ */
 void Matriz::redimensionar(int filas, int columnas)
 {
     double** nuevo = generarTabla(filas, columnas);
@@ -138,6 +180,9 @@ void Matriz::redimensionar(int filas, int columnas)
     this->columnas = columnas;
 }
 
+/*
+ * Sobrecarga del operador <<.
+ */
 std::ostream& operator<<(std::ostream& os, const Matriz& a)
 {
     for(unsigned int i = 0; i < a.filas; ++i) {
@@ -150,6 +195,9 @@ std::ostream& operator<<(std::ostream& os, const Matriz& a)
     return os;
 }
 
+/*
+ * Sobrecarga del operador >>.
+ */
 std::istream& operator>>(std::istream& is, Matriz& a)
 {
     int filas, columnas;
@@ -171,6 +219,9 @@ std::istream& operator>>(std::istream& is, Matriz& a)
     return is;
 }
 
+/*
+ * Genera dinámicamente una tabla bidimensional inicializada en cero.
+ */
 double** Matriz::generarTabla(unsigned int filas, unsigned int columnas)
 {
     double** tabla;
@@ -188,6 +239,9 @@ double** Matriz::generarTabla(unsigned int filas, unsigned int columnas)
     return tabla;
 }
 
+/*
+ * Calcula la matriz de cofactores.
+ */
 Matriz Matriz::cofactor()
 {
     if (filas != columnas) throw "Error: La matriz no es cuadrada";
