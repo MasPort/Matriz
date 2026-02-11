@@ -7,12 +7,18 @@ using namespace std;
 int main()
 {
     Matriz a(5, 7);
+    Matriz b(2, 7);
 
     cin >> a;
+    cin >> b;
 
     cout << a;
-
-    a.redimensionar(2, 5);
+    try {
+        cout << b + a;
+    }
+    catch (...){
+        cout << "no see pudo";
+    }
 
     cout << "\n" << a;
 

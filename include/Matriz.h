@@ -7,11 +7,12 @@ class Matriz
 {
     public:
         Matriz(unsigned int filas, unsigned int columnas);
+        Matriz(unsigned int filas, unsigned int columnas, int** entradas);
         virtual ~Matriz();
 
         void operator=(int** entradas);
         int* operator[](int n);
-        void operator+(const Matriz& a);
+        Matriz operator+(const Matriz& a);
         void operator-(const Matriz& a);
 
         void redimensionar(int filas, int columnas);

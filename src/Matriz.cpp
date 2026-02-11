@@ -9,6 +9,14 @@ Matriz::Matriz(unsigned int filas, unsigned int columnas)
     this->entradas = generarTabla(this->filas, this->columnas);
 }
 
+Matriz::Matriz(unsigned int filas, unsigned int columnas, int** entradas)
+{
+    this->filas = filas;
+    this->columnas = columnas;
+
+    this->entradas = entradas;
+}
+
 Matriz::~Matriz()
 {
     for (unsigned int i = 0; i < filas; i++) {
@@ -90,4 +98,28 @@ int** Matriz::generarTabla(unsigned int filas, unsigned int columnas)
     }
 
     return tabla;
+}
+
+Matriz Matriz::operator+(const Matriz& a)
+{
+
+    if (this->columnas == a.columnas && this->filas == a.filas){
+        int** Resultado = generarTabla(a.columnas, a.filas);
+
+
+
+            for (int i = 0; i < this->columnas; i++) {
+                for (int j = 0; j < this->filas; j++) {
+                    Resultado[i][j]= this->entradas[i][j] + a.entradas[i][j];
+
+                }
+
+
+            }
+            return Matriz(a.filas, a.columnas, Resultado);
+
+    }else{
+      throw "no se pudo" ;
+
+    }
 }
