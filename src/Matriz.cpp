@@ -293,16 +293,24 @@ Matriz operator*(double escalar, Matriz& a)
  */
 Matriz& Matriz::operator=(const Matriz& a)
 {
+    if (this == &a) return *this;
 
-double** Resultado = generarTabla(a.columnas, a.filas);
-for (unsigned int i = 0; i < a.filas; i++) {
-    for (unsigned int j = 0; j < a.columnas; j++) {
-        Resultado[i][j]= a.entradas[i][j];
+    for (unsigned int i = 0; i < filas; ++i) {
+        delete[] entradas[i];
+    }
+    delete[] entradas;
+
+    filas = a.filas;
+    columnas = a.columnas;
+
+    entradas = generarTabla(filas, columnas);
+
+    for (unsigned int i = 0; i < filas; ++i) {
+        for (unsigned int j = 0; j < columnas; ++j) {
+            entradas[i][j] = a.entradas[i][j];
         }
     }
-   redimensionar( a.filas, a.columnas);
-   this->entradas=Resultado;
 
-
+    return *this;
 }
 
